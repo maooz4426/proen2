@@ -56,4 +56,14 @@ public class DoubleStack {
         return dataArray.length;
     }
 
+    public void show() {
+
+        for (int i = 0; i < sp; i++) {
+
+            System.out.println(dataArray[i]);
+
+        }
+
+    }
+
 }
