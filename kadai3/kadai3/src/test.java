@@ -8,6 +8,7 @@ public class test {
         dStack.isEmpty();
         dStack.size();
         dStack.show();
+
     }
 
 }

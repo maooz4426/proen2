@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class DoubleStack {
 
     private double[] dataArray; // データに格納する配列
@@ -58,9 +60,19 @@ public class DoubleStack {
 
     public void show() {
 
-        for (int i = 0; i < sp; i++) {
+        System.out.print(Arrays.toString(dataArray));
 
-            System.out.println(dataArray[i]);
+    }
+
+    private DoubleStack d1;
+
+    public void push(double data) {
+
+        if (d1.isFull() == true) {
+
+            System.out.println("スタックがいっぱいです");
+
+        } else {
 
         }
 
