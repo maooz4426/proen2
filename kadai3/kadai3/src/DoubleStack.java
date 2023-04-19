@@ -101,4 +101,24 @@ public class DoubleStack {
 
         }
     }
+
+    public void extend(int size) {
+
+        int exDoubleSize = doubleStackSize + size;
+
+        DoubleStack exDoubleStack = new DoubleStack(exDoubleSize);
+
+        for (int i = 0; i < sp; i++) {
+
+            exDoubleStack.dataArray[i] = this.dataArray[i];
+
+        }
+
+        this.dataArray = exDoubleStack.dataArray;
+
+    }
+
+    public void extendPush() {
+
+    }
 }

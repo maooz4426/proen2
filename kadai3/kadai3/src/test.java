@@ -10,9 +10,9 @@ public class test {
         // 現在のスタックを表示
         testStack.show();
         System.out.println("格納データ数 : " + testStack.size());
-        // データクリア
-        testStack.clear();
-        System.out.println("クリア後データ数 : " + testStack.size());
+        testStack.extend(10);
+        testStack.show();
+
     }
 
 }
