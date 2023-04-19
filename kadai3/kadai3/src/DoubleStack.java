@@ -114,11 +114,23 @@ public class DoubleStack {
 
         }
 
+        doubleStackSize = exDoubleSize;// doubleStackSizeに代入しないとextendpushでpush()が上手く使えない
+
         this.dataArray = exDoubleStack.dataArray;
 
     }
 
-    public void extendPush() {
+    public void extendPush(double data) {
+
+        if (this.isFull() == true) {
+            this.extend(10);
+            this.push(data);
+
+        } else {
+
+            this.push(data);
+
+        }
 
     }
 }
