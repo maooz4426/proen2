@@ -37,12 +37,10 @@ public class DoubleStack {
 
         if (sp == 0) {
 
-            System.out.println("true");
             return true;
 
         } else {
 
-            System.out.println("false");
             return false;
 
         }
@@ -71,11 +69,36 @@ public class DoubleStack {
 
         } else {
 
-            this.dataArray[sp] = data;
-
-            sp++;
+            this.dataArray[sp++] = data;
 
         }
     }
 
+    public double pop() {
+
+        if (this.isEmpty() == true) {
+
+            System.err.println("スタックが空です");
+
+            return Double.NaN;
+
+        } else {
+
+            double dataPop = this.dataArray[--sp];
+
+            this.dataArray[sp] = 0;
+
+            return dataPop;
+
+        }
+    }
+
+    public void clear() {
+
+        while (!this.isEmpty()) {
+
+            this.pop();
+
+        }
+    }
 }
