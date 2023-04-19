@@ -2,12 +2,19 @@ public class test {
 
     public static void main(String[] args) {
 
-        DoubleStack dStack = new DoubleStack(3);
+        DoubleStack testStack = new DoubleStack(5);
+        // スタックにデータを5個追加
+        for (int i = 0; i < 5; i++) {
+            testStack.push(i * 0.5 + 1);
+        }
 
-        dStack.isFull();
-        dStack.isEmpty();
-        dStack.size();
-        dStack.show();
+        // 現在のスタックを表示
+        testStack.show();
+        System.out.println("格納データ数 : " + testStack.size());
+
+        // さらにスタックに追加すると？
+        testStack.push(5);
+        System.out.println("格納データ数 : " + testStack.size());
 
     }
 

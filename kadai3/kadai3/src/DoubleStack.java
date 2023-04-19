@@ -1,33 +1,32 @@
-import java.util.Arrays;
+import java.util.*;
 
 public class DoubleStack {
 
     private double[] dataArray; // データに格納する配列
     private int sp; // スタックポインタ＝格納されているデータの個数
+    private int doubleStackSize;// スタックの容量
 
     DoubleStack(int maxSize) {
 
         // double型の配列を初期化
         dataArray = new double[maxSize];
-        sp = maxSize;
+        sp = 0;
+        doubleStackSize = maxSize;
 
     }
 
     public boolean isFull() {
 
-        if (sp == 0) {// 要素数が０の時、空であり、dataArray==spとすると空でもtureになる
+        if (dataArray.length == 0) {// 要素数が０の時
 
-            System.out.println("false");
             return false;
 
-        } else if (dataArray.length == sp) {
+        } else if (sp == doubleStackSize) {
 
-            System.out.println("true");
             return true;
 
         } else {
 
-            System.out.println("false");
             return false;
 
         }
@@ -36,7 +35,7 @@ public class DoubleStack {
 
     public boolean isEmpty() {
 
-        if (dataArray.length == 0) {
+        if (sp == 0) {
 
             System.out.println("true");
             return true;
@@ -51,31 +50,32 @@ public class DoubleStack {
 
     public int size() {
 
-        int size = dataArray.length;
+        int size = sp;
 
         System.out.println(size);
 
-        return dataArray.length;
+        return size;
     }
 
     public void show() {
 
-        System.out.print(Arrays.toString(dataArray));
+        System.out.println(Arrays.toString(dataArray));
 
     }
 
-    private DoubleStack d1;
-
     public void push(double data) {
 
-        if (d1.isFull() == true) {
+        if (this.isFull() == true) {
 
-            System.out.println("スタックがいっぱいです");
+            System.err.println("スタックがいっぱいです。");
 
         } else {
 
-        }
+            this.dataArray[sp] = data;
 
+            sp++;
+
+        }
     }
 
 }

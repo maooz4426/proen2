@@ -90,7 +90,7 @@ public class Line2D {
 
     public boolean equals(Line2D ln) {
 
-        if (p1 == ln.p1 && p2 == ln.p2) {
+        if (this.p1 == ln.p1 && this.p2 == ln.p2) {
 
             return true;
 
