@@ -16,7 +16,9 @@ public class DoubleQueue {
 
     private int next(int a) {
 
-        return (a + 1) % maxSize;
+        int result = (a + 1) % maxSize;
+
+        return result;
 
     }
 
@@ -72,7 +74,9 @@ public class DoubleQueue {
 
         if (!this.isFull()) {
 
-            this.dataArray[rear++] = data;
+            this.dataArray[rear] = data;
+
+            rear = next(rear);
 
         } else {
 
@@ -85,14 +89,7 @@ public class DoubleQueue {
 
         if (!this.isEmpty()) {
 
-            int qp = front + 1;
-            for (int i = front; i < rear; i++) {
-
-                this.dataArray[front] = this.dataArray[qp++];
-
-            }
-
-            rear--;// 奥に詰めるのでrearを下げる
+            this.dataArray[front++] = 0;
 
         } else {
 
