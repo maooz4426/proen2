@@ -9,7 +9,8 @@ public class DoubleQueue {
     DoubleQueue(int maxSize) {
 
         dataArray = new double[maxSize + 1];
-        this.maxSize = maxSize;
+
+        this.maxSize = maxSize + 1;
         front = rear = 0;
 
     }
@@ -17,6 +18,14 @@ public class DoubleQueue {
     private int next(int a) {
 
         int result = (a + 1) % maxSize;
+
+        return result;
+
+    }
+
+    private int restore(int a) {
+
+        int result = a - 1;
 
         return result;
 
@@ -37,20 +46,33 @@ public class DoubleQueue {
 
     public boolean isFull() {
 
-        if (rear == maxSize) {
+        if (next(rear) == front) {// rearの次に数が入ってたら良い
+
+            restore(rear);
 
             return true;
 
         } else {
 
+            restore(rear);
+
             return false;
 
         }
+
     }
 
     public int size() {
 
-        return rear;
+        if (front > rear) {
+
+            return (maxSize - front) + rear + 1;
+
+        } else {
+
+            return rear - front + 1;
+
+        }
 
     }
 
@@ -58,7 +80,7 @@ public class DoubleQueue {
 
         String s = "[";
 
-        for (int i = front; i < rear; i++) {
+        for (int i = front; i != rear; next(i)) {
 
             s += this.dataArray[i] + " ";
 
@@ -76,11 +98,14 @@ public class DoubleQueue {
 
             this.dataArray[rear] = data;
 
-            rear = next(rear);
+            System.out.println(this.dataArray[rear] + "を挿入");
+
+            next(rear);
 
         } else {
 
             System.err.println("キューがいっぱいです");
+
         }
 
     }
@@ -89,7 +114,9 @@ public class DoubleQueue {
 
         if (!this.isEmpty()) {
 
-            this.dataArray[front++] = 0;
+            System.out.println(this.dataArray[front] + "を取り出した");
+            this.dataArray[front] = 0;
+            next(front);
 
         } else {
 
