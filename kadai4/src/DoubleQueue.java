@@ -3,29 +3,23 @@ public class DoubleQueue {
 
     private double dataArray[];
     private int maxSize;
-    int front;
-    int rear;
+    private int front;
+    private int rear;
+    private boolean fjudge = false;// isFull()の状態判別で使用
+    private boolean ejudge = false;// isEmpty()の状態判別で使用
 
     DoubleQueue(int maxSize) {
 
         dataArray = new double[maxSize + 1];
 
-        this.maxSize = maxSize + 1;
+        this.maxSize = maxSize;
         front = rear = 0;
 
     }
 
     private int next(int a) {
 
-        int result = (a + 1) % maxSize;
-
-        return result;
-
-    }
-
-    private int restore(int a) {
-
-        int result = a - 1;
+        int result = (a + 1) % (maxSize);
 
         return result;
 
@@ -46,15 +40,11 @@ public class DoubleQueue {
 
     public boolean isFull() {
 
-        if (next(rear) == front) {// rearの次に数が入ってたら良い
-
-            restore(rear);
+        if (next(rear) == front) {
 
             return true;
 
         } else {
-
-            restore(rear);
 
             return false;
 
@@ -68,39 +58,36 @@ public class DoubleQueue {
 
             return (maxSize - front) + rear + 1;
 
+        } else if (fjudge == true) {
+
+            return maxSize;
+
         } else {
 
             return rear - front + 1;
-
         }
 
     }
 
     public void show() {
 
-        String s = "[";
+        for (int i = 0; i < maxSize; i++)
 
-        for (int i = front; i != rear; next(i)) {
-
-            s += this.dataArray[i] + " ";
-
-        }
-
-        s += "]";
-
-        System.out.println(s);
+            System.out.println("Array" + "[" + i + "]:=" + this.dataArray[i]);
 
     }
 
     public void enqueue(double data) {
 
-        if (!this.isFull()) {
+        if (!fjudge) {
+
+            fjudge = this.isFull();
 
             this.dataArray[rear] = data;
 
             System.out.println(this.dataArray[rear] + "を挿入");
 
-            next(rear);
+            rear = next(rear);
 
         } else {
 
@@ -112,11 +99,13 @@ public class DoubleQueue {
 
     public void dequeue() {
 
-        if (!this.isEmpty()) {
+        if (!ejudge) {
 
             System.out.println(this.dataArray[front] + "を取り出した");
             this.dataArray[front] = 0;
-            next(front);
+            front = next(front);
+            ejudge = this.isEmpty();
+            fjudge = false;// fullだった場合リセットするため
 
         } else {
 
@@ -127,7 +116,7 @@ public class DoubleQueue {
 
     public void clear() {
 
-        while (!this.isEmpty()) {
+        while (!ejudge) {
 
             this.dequeue();
 
