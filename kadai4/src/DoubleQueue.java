@@ -89,6 +89,8 @@ public class DoubleQueue {
 
             rear = next(rear);
 
+            ejudge = false;// 空から追加したらリセット
+
         } else {
 
             System.err.println("キューがいっぱいです");
@@ -122,6 +124,47 @@ public class DoubleQueue {
 
         }
         front = rear = 0;
+    }
+
+    public void extend(int size) {
+
+        int exMaxSize = maxSize + size;
+
+        DoubleQueue exDoubleQueue = new DoubleQueue(exMaxSize + 1);
+
+        for (int i = 0; i < maxSize; i++) {
+
+            exDoubleQueue.dataArray[i] = this.dataArray[i];
+
+        }
+
+        // fullの場合rearが0になっている場合を考慮
+        if (fjudge) {
+
+            this.rear = this.maxSize;
+            fjudge = false;
+
+        }
+
+        this.maxSize = exMaxSize;
+
+        this.dataArray = exDoubleQueue.dataArray;
+
+    }
+
+    public void extendEnqueue(double data) {
+
+        if (!fjudge) {
+
+            this.enqueue(data);
+
+        } else {
+
+            this.extend(10);
+            this.enqueue(data);
+
+        }
+
     }
 
 }
